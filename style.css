@@ -6,8 +6,9 @@
 
 body {
   font-family: cursive;
-  background-color: #191919;
-  color: #fff;
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  color: #333;
+  /* Color de texto oscuro para contraste */
 }
 
 h1 {
@@ -15,15 +16,18 @@ h1 {
   font-size: 5rem;
   line-height: 1;
   margin-top: 45px;
+  color: #4a148c;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .score {
-  color: #4caf50;
-  background: #302f2fed;
+  color: #fff;
+  background: #f50057;
   padding: 1rem;
   line-height: 1;
   border-radius: 1rem;
   display: inline-block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .controls {
@@ -35,41 +39,98 @@ h1 {
   padding: 10px 25px;
   outline: none;
   font-size: 24px;
-  background: #c2185b;
+  background: #ff9800;
   color: #fff;
   border: 0px;
   box-shadow: 1px 2px 4px #c2185bb0;
   cursor: pointer;
+  border-radius: 30px;
+  /* Botón más redondeado */
+  transition: background 0.3s;
 }
 
 .start-btn:hover {
-  background: #187bc2;
-  box-shadow: 1px 2px 4px #185fc2b0;
+  background: #e65100;
+  /* Naranja oscuro al pasar el ratón */
+  box-shadow: 1px 2px 4px #c2a00eb0;
 }
+
+/* --- INICIO DE ESTILOS DE BOTONES DE DIFICULTAD --- */
 
 .levels {
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
 }
 
-/* Style for each difficulty level */
 .levels>div {
-  margin: 20px;
+  margin: 20px 10px;
+  /* Ajuste de margen */
 }
 
+/* Ocultar el radio button real */
+.levels input[type="radio"] {
+  display: none;
+}
+
+/* Estilo base para las etiquetas (que ahora son botones) */
+.levels label {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.7);
+  /* Fondo semi-transparente */
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Quitar los colores antiguos de los divs (ya no son necesarios) */
 .levels>div:nth-child(1) {
-  color: #00ff00;
+  color: inherit;
 }
 
 .levels>div:nth-child(2) {
-  color: #ffd24e;
+  color: inherit;
 }
 
 .levels>div:nth-child(3) {
-  color: #ff0000;
+  color: inherit;
 }
+
+/* Estilo para el botón SELECCIONADO (fácil) */
+.levels input[type="radio"]#easy:checked+label {
+  background: #00c853;
+  /* Verde */
+  color: white;
+  border-color: #008a3b;
+  transform: scale(1.05);
+  /* Efecto de selección */
+}
+
+/* Estilo para el botón SELECCIONADO (medio) */
+.levels input[type="radio"]#medium:checked+label {
+  background: #ffab00;
+  /* Naranja */
+  color: white;
+  border-color: #d88d00;
+  transform: scale(1.05);
+}
+
+/* Estilo para el botón SELECCIONADO (difícil) */
+.levels input[type="radio"]#hard:checked+label {
+  background: #d50000;
+  /* Rojo */
+  color: white;
+  border-color: #a00000;
+  transform: scale(1.05);
+}
+
+/* --- FIN DE ESTILOS DE BOTONES DE DIFICULTAD --- */
 
 /* Style for the game board */
 .game {
@@ -77,17 +138,19 @@ h1 {
   height: 400px;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for each hole on the game board */
 .hole {
   flex: 1 0 33.33%;
   overflow: hidden;
   position: relative;
 }
 
-/* Style for the mole inside each hole */
 .hole:after {
   background: url("img/hole.png") bottom center no-repeat;
   background-size: contain;
@@ -99,7 +162,6 @@ h1 {
   bottom: -30px;
 }
 
-/* Style for the mole when it pops up from a hole */
 .mole {
   position: absolute;
   top: 100%;
@@ -109,14 +171,11 @@ h1 {
   background-size: 70%;
   transition: all 0.4s;
   cursor: pointer;
-
 }
 
-
-
-/* Style for the mole when it pops up from a hole and becomes visible */
 .hole.up .mole {
   top: 0;
+  filter: drop-shadow(0 0 10px #ffeb3b) drop-shadow(0 0 15px #ffeb3b);
 }
 
 /* adjust for small screen size */
@@ -139,15 +198,21 @@ h1 {
     padding: 8px 20px;
   }
 
+  /* Ajuste para los nuevos botones en móvil */
   .levels>div {
-    margin: 10px;
+    margin: 10px 5px;
+  }
+
+  .levels label {
+    padding: 6px 15px;
+    font-size: 18px;
   }
 
   .game {
     width: 90%;
     height: 300px;
+    padding: 5px;
   }
-
 
   .mole {
     padding: 40px;
